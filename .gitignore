@@ -1,2 +1,5 @@
 go.mod
 go.sum
+authos.json
+package-info.json
+ghpm
