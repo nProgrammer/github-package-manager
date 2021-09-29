@@ -7,6 +7,7 @@ package main
 
 import (
 	"flag"
+	"fmt"
 	"ghpm/config"
 	"ghpm/controllers"
 )
@@ -19,7 +20,12 @@ func main() {
 	flag.Parse()
 
 	if *check {
-		controllers.CheckAuth(*url, authP)
+		answ := controllers.CheckAuth(*url, authP)
+		if answ {
+			fmt.Println("Package is safe")
+		} else {
+			fmt.Println("Package isn't register in database")
+		}
 	}
 
 	if *help {
