@@ -1,19 +1,14 @@
 package controllers
 
 import (
-	"encoding/json"
 	"fmt"
 	"ghpm/config"
 	"ghpm/models"
 	"ghpm/tools"
-	"io/ioutil"
 	"strings"
 )
 
-func CheckAuth(url string) {
-	file, _ := ioutil.ReadFile("./authos.json")
-	data := models.LicensedPackages{}
-	_ = json.Unmarshal([]byte(file), &data)
+func CheckAuth(url string, data models.LicensedPackages) {
 	fmt.Println(data)
 	dataP := config.LoadPackageInfo()
 	hashURL := tools.EncSHA(url)
