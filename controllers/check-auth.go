@@ -5,6 +5,7 @@ import (
 	"encoding/hex"
 	"encoding/json"
 	"fmt"
+	"ghpm/config"
 	"ghpm/models"
 	"io/ioutil"
 	"strings"
@@ -15,9 +16,7 @@ func CheckAuth(url string) {
 	data := models.LicensedPackages{}
 	_ = json.Unmarshal([]byte(file), &data)
 	fmt.Println(data)
-	file, _ = ioutil.ReadFile("./package-info.json")
-	dataP := models.Package{}
-	_ = json.Unmarshal([]byte(file), &dataP)
+	dataP := config.LoadPackageInfo()
 	hash := sha256.Sum256([]byte(url))
 	hashURL := hex.EncodeToString(hash[:])
 	hashP := strings.Split(dataP.AuthID, "-")
