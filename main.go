@@ -15,6 +15,7 @@ import (
 func main() {
 	authP := config.LoadAuthorizedPackagesList()
 	check := flag.Bool("check-auth", false, "Function that is checking is package authorized in official database")
+	ins := flag.Bool("install", false, "Function that is installing package")
 	help := flag.Bool("help", false, "Showing help section")
 	url := flag.String("url", "", "Url of package")
 	flag.Parse()
@@ -26,6 +27,10 @@ func main() {
 		} else {
 			fmt.Println("Package isn't register in database")
 		}
+	}
+
+	if *ins {
+		controllers.InstallPackage(config.LoadPackageInfo())
 	}
 
 	if *help {
