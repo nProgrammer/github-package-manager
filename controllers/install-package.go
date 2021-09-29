@@ -1,13 +1,22 @@
 package controllers
 
 import (
-	"ghpm/models"
+	"fmt"
+	"ghpm/config"
 	"os"
 	"os/exec"
 	"strings"
 )
 
-func InstallPackage(pkg models.Package) {
+func InstallPackage(url string) {
+	cmd := exec.Command("git", "clone", url)
+	nameOfdir := strings.Split(url, "/")[4]
+	cmd.Stdin = os.Stdin
+	cmd.Stderr = os.Stderr
+	cmd.Run()
+	os.Chdir(nameOfdir)
+	fmt.Println(nameOfdir)
+	pkg := config.LoadPackageInfo()
 	var commands [][]string
 	var i int = 0
 	for i < len(pkg.Instructions) {

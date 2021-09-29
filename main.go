@@ -30,7 +30,7 @@ func main() {
 	}
 
 	if *ins {
-		controllers.InstallPackage(config.LoadPackageInfo())
+		controllers.InstallPackage(*url)
 	}
 
 	if *help {
