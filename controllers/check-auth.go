@@ -1,12 +1,11 @@
 package controllers
 
 import (
-	"crypto/sha256"
-	"encoding/hex"
 	"encoding/json"
 	"fmt"
 	"ghpm/config"
 	"ghpm/models"
+	"ghpm/tools"
 	"io/ioutil"
 	"strings"
 )
@@ -17,8 +16,7 @@ func CheckAuth(url string) {
 	_ = json.Unmarshal([]byte(file), &data)
 	fmt.Println(data)
 	dataP := config.LoadPackageInfo()
-	hash := sha256.Sum256([]byte(url))
-	hashURL := hex.EncodeToString(hash[:])
+	hashURL := tools.EncSHA(url)
 	hashP := strings.Split(dataP.AuthID, "-")
 	fmt.Println(hashP)
 	fmt.Println(hashURL)
