@@ -3,12 +3,24 @@ package controllers
 import (
 	"fmt"
 	"ghpm/config"
+	"ghpm/models"
 	"os"
 	"os/exec"
 	"strings"
 )
 
-func InstallPackage(url string) {
+func InstallPackage(url string, list models.LicensedPackages) {
+	isAuth := CheckAuth(url, list)
+	if !isAuth {
+		fmt.Println("This package isn't licensed. Are you sure you want to install it?")
+		fmt.Println("Yes[Y]/No[N]:")
+		var answer string
+		fmt.Scanln(&answer)
+		answer = strings.TrimSpace(answer)
+		if answer == "N" || answer == "n" {
+			return
+		}
+	}
 	cmd := exec.Command("git", "clone", url)
 	nameOfdir := strings.Split(url, "/")[4]
 	cmd.Stdin = os.Stdin

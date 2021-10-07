@@ -33,7 +33,7 @@ func main() {
 		controllers.ShowAuthorizedPackages(authP)
 	}
 	if *ins {
-		controllers.InstallPackage(*url)
+		controllers.InstallPackage(*url, authP)
 	}
 
 	if *help {
