@@ -3,3 +3,4 @@ go.sum
 authos.json
 package-info.json
 ghpm
+authorized-packages.json

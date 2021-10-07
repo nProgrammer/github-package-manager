@@ -4,14 +4,11 @@ import (
 	"encoding/json"
 	"ghpm/models"
 	"io/ioutil"
-	"os"
 	"os/exec"
 )
 
 func LoadAuthorizedPackagesList() models.LicensedPackages {
-	cmd := exec.Command("wget", "https://github.com/nProgrammer/github-package-manager/blob/main/authorized-packages.json")
-	cmd.Stdin = os.Stdin
-	cmd.Stderr = os.Stderr
+	cmd := exec.Command("wget", "https://raw.githubusercontent.com/nProgrammer/github-package-manager/main/authorized-packages.json")
 	cmd.Run()
 	file, _ := ioutil.ReadFile("./authorized-packages.json")
 	data := models.LicensedPackages{}
